@@ -1,0 +1,150 @@
+-- Volcando estructura de base de datos para tiendaropa
+CREATE DATABASE IF NOT EXISTS `tiendaropa` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
+USE `tiendaropa`;
+
+-- Volcando estructura para tabla tiendaropa.accesorios
+CREATE TABLE IF NOT EXISTS `accesorios` (
+  `accesorio_id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `tipo_accesorio` varchar(100) DEFAULT NULL,
+  `material` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`accesorio_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.accesorios: ~6 rows (aproximadamente)
+INSERT INTO `accesorios` (`accesorio_id`, `producto_id`, `tipo_accesorio`, `material`) VALUES
+	(1, 1, 'Collar', 'Plástico'),
+	(2, 2, 'Pulsera', 'Madera'),
+	(3, 3, 'Aretes', 'Oro'),
+	(4, 4, 'Sombrero', 'Paja'),
+	(5, 5, 'Cinturón', 'Cuero'),
+	(6, 6, 'Bufanda', 'Lana');
+
+-- Volcando estructura para tabla tiendaropa.camisas
+CREATE TABLE IF NOT EXISTS `camisas` (
+  `camisa_id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `talla` varchar(10) NOT NULL,
+  `tipo_manga` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`camisa_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.camisas: ~7 rows (aproximadamente)
+INSERT INTO `camisas` (`camisa_id`, `producto_id`, `talla`, `tipo_manga`) VALUES
+	(1, 2, 'L', 'Larga'),
+	(2, 1, 'M', 'Corta'),
+	(3, 2, 'L', 'Larga'),
+	(4, 3, 'XL', 'Corta'),
+	(5, 4, 'S', 'Sin Mangas'),
+	(6, 5, 'M', 'Larga'),
+	(7, 6, 'L', 'Corta');
+
+-- Volcando estructura para tabla tiendaropa.categorias
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `categoria_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_categoria` varchar(255) NOT NULL,
+  PRIMARY KEY (`categoria_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.categorias: ~4 rows (aproximadamente)
+INSERT INTO `categorias` (`categoria_id`, `nombre_categoria`) VALUES
+	(1, 'Gorros'),
+	(2, 'Camisas'),
+	(3, 'Pantalones'),
+	(4, 'Accesorios');
+
+-- Volcando estructura para tabla tiendaropa.clientes
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id_cliente`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.clientes: ~6 rows (aproximadamente)
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `email`, `telefono`) VALUES
+	(1, 'Ana López', 'ana.lopez@gmail.com', '3312345678'),
+	(2, 'Carlos Ruiz', 'carlos.ruiz@gmail.com', '3323456789'),
+	(3, 'Luis Torres', 'luis.torres@gmail.com', '3334567890'),
+	(4, 'María Pérez', 'maria.perez@gmail.com', '3345678901'),
+	(5, 'Sofía Morales', 'sofia.morales@gmail.com', '3356789012'),
+	(6, 'David Gómez', 'david.gomez@gmail.com', '3367890123');
+
+-- Volcando estructura para tabla tiendaropa.gorros
+CREATE TABLE IF NOT EXISTS `gorros` (
+  `gorro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `material` varchar(255) NOT NULL,
+  `tamanio` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`gorro_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.gorros: ~7 rows (aproximadamente)
+INSERT INTO `gorros` (`gorro_id`, `producto_id`, `material`, `tamanio`) VALUES
+	(1, 1, 'Lana', 'M'),
+	(2, 1, 'Lana', 'M'),
+	(3, 2, 'Algodón', 'S'),
+	(4, 3, 'Poliéster', 'L'),
+	(5, 4, 'Seda', 'XL'),
+	(6, 5, 'Cuero', 'M'),
+	(7, 6, 'Fieltro', 'L');
+
+-- Volcando estructura para tabla tiendaropa.pantalones
+CREATE TABLE IF NOT EXISTS `pantalones` (
+  `pantalon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `cintura` varchar(10) DEFAULT NULL,
+  `largo` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`pantalon_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.pantalones: ~6 rows (aproximadamente)
+INSERT INTO `pantalones` (`pantalon_id`, `producto_id`, `cintura`, `largo`) VALUES
+	(1, 1, '30', '32'),
+	(2, 2, '32', '34'),
+	(3, 3, '34', '36'),
+	(4, 4, '36', '38'),
+	(5, 5, '28', '30'),
+	(6, 6, '40', '42');
+
+-- Volcando estructura para tabla tiendaropa.productos
+CREATE TABLE IF NOT EXISTS `productos` (
+  `id_producto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `categoria` varchar(50) DEFAULT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `stock` int(11) NOT NULL,
+  PRIMARY KEY (`id_producto`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.productos: ~7 rows (aproximadamente)
+INSERT INTO `productos` (`id_producto`, `nombre`, `categoria`, `precio`, `stock`) VALUES
+	(1, 'Camisa Casual', 'Camisas', 29.99, 48),
+	(2, 'Camisa Formal', 'Camisas', 29.99, 30),
+	(3, 'Pantalón de Mezclilla', 'Pantalones', 49.99, 20),
+	(4, 'Sombrero Vaquero', 'Accesorios', 39.99, 15),
+	(5, 'Reloj Deportivo', 'Relojes', 99.99, 10),
+	(6, 'Zapatos Casual', 'Zapatos', 59.99, 25),
+	(7, 'Gorro de Invierno', 'Gorros', 12.99, 50);
+
+-- Volcando estructura para tabla tiendaropa.ventas
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `id_venta` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `total` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id_venta`),
+  KEY `id_cliente` (`id_cliente`),
+  CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Volcando datos para la tabla tiendaropa.ventas: ~6 rows (aproximadamente)
+INSERT INTO `ventas` (`id_venta`, `fecha`, `id_cliente`, `total`) VALUES
+	(1, '2025-04-28', 1, 59.98),
+	(2, '2025-04-29', 2, 159.96),
+	(3, '2025-04-30', 3, 74.97),
+	(4, '2025-05-01', 4, 99.99),
+	(5, '2025-05-02', 5, 49.99),
+	(6, '2025-05-03', 6, 29.99);
